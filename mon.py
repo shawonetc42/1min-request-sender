@@ -1,6 +1,6 @@
 import requests
-import time
 from requests.exceptions import RequestException
+import time
 
 # সাইটের URL
 url = "https://testtmon.onrender.com/test"
@@ -16,10 +16,10 @@ def send_request():
         time.sleep(5)
         send_request()
 
-def main():
-    while True:
-        send_request()
-        time.sleep(60)  # ১ মিনিট পর পুনরায় রিকুয়েস্ট পাঠাবে
-
-if __name__ == "__main__":
-    main()
+# Vercel এর জন্য Handler ফাংশন
+def handler(event, context):
+    send_request()
+    return {
+        'statusCode': 200,
+        'body': 'Request sent successfully!'
+    }
