@@ -1,22 +1,21 @@
 import requests
 import time
 
-# আপনার Vercel এন্ডপইন্টের URL
-url = 'https://1min-request-sender.vercel.app/'
+url = 'https://testtmon.onrender.com/test'
 
-def send_request():
-    start_time = time.time()
+# রিকোয়েস্ট পাঠানোর আগে টাইম রেকর্ড করা
+start_time = time.time()
 
-    try:
-        response = requests.get(url)
-        latency = time.time() - start_time
-        print(f"Status Code: {response.status_code}")
-        print(f"Response Time: {latency:.2f} seconds")
-        print(f"Response Content: {response.text[:100]}...")  # প্রথম 100 ক্যারেক্টার
-    except Exception as e:
-        print(f"Request failed: {e}")
+# GET রিকোয়েস্ট পাঠানো
+response = requests.get(url)
 
-# প্রতি মিনিটে রিকোয়েস্ট পাঠান
-while True:
-    send_request()
-    time.sleep(60)  # 60 সেকেন্ড অপেক্ষা করুন
+# রিকোয়েস্ট পাঠানোর পরে টাইম রেকর্ড করা
+end_time = time.time()
+
+# স্পিড (লেটেন্সি) নির্ণয় করা
+latency = end_time - start_time
+
+# ফলাফল প্রিন্ট করা
+print(f"Status Code: {response.status_code}")
+print(f"Response Time: {latency} seconds")
+print(f"Response Content: {response.text[:100]}...")  # প্রথম 100 ক্যারেক্টার দেখানো হচ্ছে
