@@ -3,19 +3,18 @@ import time
 
 url = 'https://testtmon.onrender.com/test'
 
-# রিকোয়েস্ট পাঠানোর আগে টাইম রেকর্ড করা
+def send_request():
+    try:
+        response = requests.get(url)
+        print(f'Request sent: {response.status_code} - {response.text}')
+    except requests.RequestException as e:
+        print(f'Error: {e}')
+
+# 24 hours in seconds
+seconds_in_24_hours = 24 * 60 * 60
+
 start_time = time.time()
 
-# GET রিকোয়েস্ট পাঠানো
-response = requests.get(url)
-
-# রিকোয়েস্ট পাঠানোর পরে টাইম রেকর্ড করা
-end_time = time.time()
-
-# স্পিড (লেটেন্সি) নির্ণয় করা
-latency = end_time - start_time
-
-# ফলাফল প্রিন্ট করা
-print(f"Status Code: {response.status_code}")
-print(f"Response Time: {latency} seconds")
-print(f"Response Content: {response.text[:100]}...")  # প্রথম 100 ক্যারেক্টার দেখানো হচ্ছে
+while time.time() - start_time < seconds_in_24_hours:
+    send_request()
+    time.sleep(60)  # Wait for 60 seconds
