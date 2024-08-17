@@ -2,11 +2,11 @@ name: Schedule Check Server
 
 on:
   schedule:
-    - cron: '*/60 * * * *' # প্রতি ঘণ্টায় চালানো হবে
+    - cron: '*/1 * * * *' # প্রতি মিনিটে চালানো হবে
 
 jobs:
   check-server:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger Vercel Function
-        run: curl -X GET https://your-vercel-deployment-url/api/check_server
+        run: curl -X GET https://1min-request-sender.vercel.app/api/check_server
